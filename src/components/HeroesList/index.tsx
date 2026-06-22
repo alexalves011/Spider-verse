@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 import { spidermanFont } from "../../fonts";
 import { IHeroData } from "../../interface/heroes";
 import HeroPicture from "../HeroPicture";
@@ -11,14 +15,25 @@ interface IProps {
 export default function HeroesList({ heroes }: IProps) {
   return (
     <>
-      <h1 className={`${spidermanFont.className} ${styles.title} `}>
+      <motion.h1
+        className={`${spidermanFont.className} ${styles.title} `}
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        transition={{ duration: 2, delay: 2 }}
+      >
         Personagens
-      </h1>
-      <section className={styles.heroes}>
+      </motion.h1>
+
+      <motion.section
+        className={styles.heroes}
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0  }}
+        transition={{ duration: 2 }}
+      >
         {heroes.map((hero) => (
           <HeroPicture key={hero.id} hero={hero} />
         ))}
-      </section>
+      </motion.section>
     </>
   );
 }
