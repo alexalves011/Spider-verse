@@ -9,6 +9,16 @@ import imageSpiderMan928 from "@public/spiders/spider-man-928 (1).png";
 
 import { IHeroData } from "@/src/interface/heroes";
 
+const heroHeights: Record<string, number> = {
+  "spider-man-616": 360,
+  "mulher-aranha-65": 300,
+  "spider-man-1610": 324,
+  "spider-ham-8311": 146,
+  "spider-man-90214": 376,
+  "spider-man-928": 360,
+  "sp-dr-14512": 324,
+};
+
 const heroesImage: Record<string, StaticImageData> = {
   "spider-man-616": imageSpiderMan616,
   "mulher-aranha-65": imageMulherAranha65,
@@ -25,16 +35,32 @@ interface IProps {
 
 export default function HeroPicture({ hero }: IProps) {
   const heroImage = heroesImage[hero.id];
+  const heroHeight = heroHeights[hero.id];
 
-  if (!heroImage) {
+  if (!heroImage || !heroHeight) {
     return null;
   }
 
+  const heroWidth = Math.round(
+    (heroImage.width * heroHeight) / heroImage.height,
+  );
+
   return (
-    <Image
-      src={heroImage}
-      alt={`${hero.name} (Universo-${hero.universe})`}
-      priority
-    />
+    <div
+      style={{
+        position: "relative",
+        width: heroWidth,
+        height: heroHeight,
+      }}
+    >
+      <Image
+        src={heroImage}
+        alt={`${hero.name} (Universo-${hero.universe})`}
+        fill
+        sizes={`${heroWidth}px`}
+        style={{ objectFit: "contain", objectPosition: "bottom" }}
+        priority
+      />
+    </div>
   );
 }

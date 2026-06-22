@@ -10,57 +10,25 @@
 }
 
 .heroes {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  align-items: end;
-  justify-items: center;
-  gap: clamp(0.25rem, 1vw, 1rem);
-  max-width: calc($max-width - 520px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(0.25rem, 1vw, 1.5rem);
+  max-width: calc($max-width - 280px);
   width: 100%;
   position: absolute;
   left: 0;
   right: 0;
   top: 40%;
-  padding-inline: clamp(1rem, 3vw, 3rem);
+  padding-inline: clamp(0.5rem, 2vw, 2rem);
 
   @media screen and (min-width: $max-width) {
-    max-width: calc($max-width - 320px);
+    max-width: calc($max-width - 180px);
     top: 50%;
   }
 }
 
 .imageContainer {
   position: relative;
-  width: fit-content;
-
-  img {
-    width: auto;
-    height: 100%;
-    object-fit: contain;
-    object-position: bottom;
-    display: block;
-  }
-
-  &.spider-main-616 {
-    height: $spider-main-616-height;
-  }
-
-  &.mulher-aranha-65 {
-    height: $mulher-aranha-height;
-  }
-  &.spider-main-1610 {
-    height: $spider-main-1610-height;
-  }
-  &.spider-ham-8311 {
-    height: $spider-ham-8311-height;
-  }
-  &.spider-main-90214 {
-    height: $spider-main-90214-height;
-  }
-  &.spider-main-928 {
-    height: $spider-main-928-height;
-  }
-  &.sp-dr-14512 {
-    height: $sp-dr-14512-height;
-  }
+  min-width: 0;
 }

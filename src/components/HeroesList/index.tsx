@@ -16,12 +16,7 @@ export default function HeroesList({ heroes }: IProps) {
       </h1>
       <section className={styles.heroes}>
         {heroes.map((hero) => (
-          <div
-            key={hero.id}
-            className={`${styles.imageContainer} ${styles[hero.id] ?? ""}`}
-          >
-            <HeroPicture hero={hero} />
-          </div>
+          <HeroPicture key={hero.id} hero={hero} />
         ))}
       </section>
     </>
