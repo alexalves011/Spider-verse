@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+import Link from "next/link";
+
 import { spidermanFont } from "../../fonts";
 import { IHeroData } from "../../interface/heroes";
 import HeroPicture from "../HeroPicture";
@@ -17,8 +19,8 @@ export default function HeroesList({ heroes }: IProps) {
     <>
       <motion.h1
         className={`${spidermanFont.className} ${styles.title} `}
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1}}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 2, delay: 2 }}
       >
         Personagens
@@ -27,11 +29,13 @@ export default function HeroesList({ heroes }: IProps) {
       <motion.section
         className={styles.heroes}
         initial={{ opacity: 0, y: -100 }}
-        animate={{ opacity: 1, y: 0  }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 2 }}
       >
         {heroes.map((hero) => (
-          <HeroPicture key={hero.id} hero={hero} />
+          <Link key={hero.id} href={`hero/${hero.id}`}>
+            <HeroPicture key={hero.id} hero={hero} />
+          </Link>
         ))}
       </motion.section>
     </>
