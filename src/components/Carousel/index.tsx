@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import HeroDetails from "../HeroDetails";
 import HeroPicture from "../HeroPicture";
@@ -12,6 +13,12 @@ import { IHeroData } from "@/src/interface/heroes";
 interface IProps {
   heroes: IHeroData[];
   activeId: string;
+}
+
+enum enPosition {
+  FRONT = 0,
+  MIDDLE = 1,
+  BACK = 2,
 }
 
 export default function Carousel({ heroes, activeId }: IProps) {
@@ -32,6 +39,10 @@ export default function Carousel({ heroes, activeId }: IProps) {
     setVisibleItems(visibleItems);
   }, [heroes, activeIdex]);
 
+  const handleChangeActiveIdex = (newDirection: number) => {
+    setActiveIdex((prevActiveIdex) => prevActiveIdex + newDirection);
+  };
+
   if (!visibleItems) {
     return null;
   }
@@ -39,12 +50,24 @@ export default function Carousel({ heroes, activeId }: IProps) {
   return (
     <div className={styles.container}>
       <div className={styles.carousel}>
-        <div className={styles.wrapper}>
-          {visibleItems.map((item) => (
-            <div key={item.id} className={styles.hero}>
-              <HeroPicture hero={item} />
-            </div>
-          ))}
+        <div
+          className={styles.wrapper}
+          onClick={() => handleChangeActiveIdex(1)}
+        >
+          <AnimatePresence mode="popLayout">
+            {visibleItems.map((item, position) => (
+              <motion.div
+                key={item.id}
+                className={styles.hero}
+                initial={{x: -1500, scale: 0.75}}
+                animate={{x: 0, ...getItemStyles(position) }}
+                exit={{x: 0, opacity:0, scale: 1, left: "-20px"}}
+                transition={{ duration: 0.8 }}
+              >
+                <HeroPicture hero={item} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
       <div className={styles.details}>
@@ -53,3 +76,31 @@ export default function Carousel({ heroes, activeId }: IProps) {
     </div>
   );
 }
+
+const getItemStyles = (position: enPosition) => {
+  if (position === enPosition.FRONT) {
+    return {
+      zIndex: 3,
+      filter: "blur(10px)",
+      scale: 1.2,
+    };
+  }
+
+  if (position === enPosition.MIDDLE) {
+    return {
+      zIndex: 2,
+      left: 300,
+      scale: 0.8,
+      top: "-10px",
+    };
+  }
+
+  return {
+    zIndex: 1,
+    filter: "blur(10px)",
+    left: 160,
+    top: "-20%",
+    scale: 0.6,
+    opacity: 0.8,
+  };
+};
