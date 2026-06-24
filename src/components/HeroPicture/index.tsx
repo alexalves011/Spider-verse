@@ -33,39 +33,34 @@ const heroesImage: Record<string, StaticImageData> = {
 
 interface IProps {
   hero: IHeroData;
+  isCarousel?: boolean; // Nova prop opcional
 }
 
-export default function HeroPicture({ hero }: IProps) {
+export default function HeroPicture({ hero, isCarousel = false }: IProps) {
   const heroImage = heroesImage[hero.id];
   const heroHeight = heroHeights[hero.id];
 
-  if (!heroImage || !heroHeight) {
-    return null;
-  }
-
-  const heroWidth = Math.round(
-    (heroImage.width * heroHeight) / heroImage.height,
-  );
+  if (!heroImage || !heroHeight) return null;
 
   return (
-    // 3. Troque <div> por <motion.div>
     <motion.div
       style={{
         position: "relative",
-        width: heroWidth,
-        height: heroHeight,
+        // No carrossel, o tamanho é gerenciado pelo CSS do .hero (motion.div pai)
+        width: isCarousel ? "100%" : `${Math.round((heroImage.width * heroHeight) / heroImage.height)}px`,
+        height: isCarousel ? "100%" : `${heroHeight}px`,
       }}
-      // 4. Adicione as animações aqui
-      whileHover={{ scale: 1.3 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ duration: 0.8 }}
     >
       <Image
         src={heroImage}
-        alt={`${hero.name} (Universo-${hero.universe})`}
+        alt={hero.name}
         fill
-        sizes={`${heroWidth}px`}
-        style={{ objectFit: "contain", objectPosition: "bottom" }}
+        // Remova o tamanho fixo do sizes quando estiver no carrossel
+        sizes={isCarousel ? "100vw" : `${Math.round((heroImage.width * heroHeight) / heroImage.height)}px`}
+        style={{ 
+          objectFit: "contain", 
+          objectPosition: isCarousel ? "center" : "bottom" 
+        }}
         priority
       />
     </motion.div>

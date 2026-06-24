@@ -39,6 +39,25 @@ export default function Carousel({ heroes, activeId }: IProps) {
     setVisibleItems(visibleItems);
   }, [heroes, activeIdex]);
 
+
+  useEffect(() => {
+
+    const htmlEl = document.querySelector("html")
+
+    if(!htmlEl || !visibleItems){
+      return
+    }
+
+    const currentHeroid = visibleItems[enPosition.MIDDLE].id
+    htmlEl.style.backgroundImage = `url("/spiders/${currentHeroid}-background.png")`;
+    htmlEl.classList.add("hero-page");
+
+    return () => {
+      htmlEl.classList.remove("hero-page")
+    }
+
+  },[visibleItems])
+
   const handleChangeActiveIdex = (newDirection: number) => {
     setActiveIdex((prevActiveIdex) => prevActiveIdex + newDirection);
   };
@@ -59,11 +78,10 @@ export default function Carousel({ heroes, activeId }: IProps) {
               <motion.div
                 key={item.id}
                 className={styles.hero}
-                initial={{x: -1500, scale: 0.75}}
-                animate={{x: 0, ...getItemStyles(position) }}
-                exit={{x: 0, opacity:0, scale: 1, left: "-20px"}}
-                transition={{ duration: 0.8 }}
+                // ... (seus props iniciais)
+                animate={{ x: 0, ...getItemStyles(position) }}
               >
+                {/* REMOVA a prop isCarousel se ela estiver restringindo o tamanho */}
                 <HeroPicture hero={item} />
               </motion.div>
             ))}
@@ -83,6 +101,7 @@ const getItemStyles = (position: enPosition) => {
       zIndex: 3,
       filter: "blur(10px)",
       scale: 1.2,
+  
     };
   }
 

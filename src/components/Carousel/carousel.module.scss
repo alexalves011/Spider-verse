@@ -6,11 +6,11 @@
   flex: 1;
   width: 100%;
   position: relative;
-  left: -10%;
+  left: -20%;
 }
 
 .wrapper {
-  height: 1300vh;
+  height: 100vh;
   position: relative;
   cursor: grab;
 
@@ -26,10 +26,20 @@
 }
 
 .hero {
-  height: 100%;
-  position: absolute;
-  width: 500px;
+position: absolute;
+  top: 0;
   left: 0;
+  width: 100%; // Ocupa o espaço do wrapper
+  height: 100vh; // Define a altura baseada na tela
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  // Isso garante que a imagem do HeroPicture ocupe o espaço
+  > div {
+    width: 100% !important;
+    height: 100% !important;
+  }
 
   img {
     height: 100%;
