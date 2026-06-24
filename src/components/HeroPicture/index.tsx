@@ -1,6 +1,5 @@
 "use client"; // 1. Adicione isso no topo
 import { motion } from "framer-motion"; // 2. Importe o motion
-
 import Image, { StaticImageData } from "next/image";
 import imageSpiderMan616 from "@public/spiders/spider-man-616 (1).png";
 import imageMulherAranha65 from "@public/spiders/mulher-aranha-65 (1).png";
