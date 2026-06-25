@@ -24,7 +24,7 @@ enum enPosition {
 export default function Carousel({ heroes, activeId }: IProps) {
   const [visibleItems, setVisibleItems] = useState<IHeroData[] | null>(null);
   const [activeIdex, setActiveIdex] = useState<number>(
-    heroes.findIndex((hero) => hero.id === activeId),
+    heroes.findIndex((hero) => hero.id === activeId) -1,
   );
 
   useEffect(() => {
@@ -88,9 +88,9 @@ export default function Carousel({ heroes, activeId }: IProps) {
           </AnimatePresence>
         </div>
       </div>
-      <div className={styles.details}>
-        <HeroDetails data={heroes[0]} />
-      </div>
+      <motion.div className={styles.details} initial={{opacity:0}} animate={{opacity: 1}} transition={{delay: 1, duration:2}}>
+        <HeroDetails data={visibleItems[enPosition.MIDDLE]} />
+      </motion.div>
     </div>
   );
 }
