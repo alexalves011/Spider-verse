@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Projeto Spider-Verse
 
-First, run the development server:
+Este é o repositório do projeto Spider-Verse, desenvolvido durante o curso da [DIO](https://dio.me). O projeto consiste em uma aplicação interativa inspirada no universo do Homem-Aranha, usando as principais stacks front-end: React, Next.js, a biblioteca Framer Motion, Sass e TypeScript para criar um projeto visual incrível e de alta performance.
+
+[Demonstração do projeto.webm](https://github.com/micheleambrosio/dio-spiderverse/assets/55519539/6ea3a467-ca98-4b3d-aa16-855db8a5fdb0)
+
+## 💻 Tecnologias utilizadas no projeto
+
+- [React.js](https://reactjs.org) (v18)
+- [Next.js](https://nextjs.org) (v13)
+- [TypeScript](https://www.typescriptlang.org) (v5)
+- [ESLint](https://eslint.org)
+- [Framer Motion](https://www.framer.com/api/motion)
+- [SASS](https://sass-lang.com)
+
+## 🛠️ Instruções de execução
+
+Siga as instruções abaixo para rodar o projeto em seu ambiente local:
+
+1. Certifique-se de ter o Node.js instalado em seu computador. Você pode baixar a versão mais recente do Node.js em https://nodejs.org.
+
+2. Clone este repositório em seu computador ou faça o download do código fonte.
+
+3. Abra o terminal e navegue até o diretório raiz do projeto.
+
+4. Instale as dependências do projeto executando o seguinte comando:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Após a conclusão da instalação das dependências, inicie o servidor de desenvolvimento local com o comando:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+6. O servidor local será iniciado e você poderá acessar o projeto no seu navegador através do seguinte endereço:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+  http://localhost:3000
+```
