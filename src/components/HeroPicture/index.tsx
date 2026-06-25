@@ -46,16 +46,20 @@ export default function HeroPicture({ hero, isCarousel = false }: IProps) {
     <motion.div
       style={{
         position: "relative",
-        // No carrossel, o tamanho é gerenciado pelo CSS do .hero (motion.div pai)
         width: isCarousel ? "100%" : `${Math.round((heroImage.width * heroHeight) / heroImage.height)}px`,
         height: isCarousel ? "100%" : `${heroHeight}px`,
       }}
+      // --- RESTAURAÇÃO DA ANIMAÇÃO ---
+      // Só aplica animação se NÃO for o carrossel
+      whileHover={!isCarousel ? { scale: 1.1, y: -20 } : {}}
+      whileTap={!isCarousel ? { scale: 0.9 } : {}}
+      transition={{ duration: 0.3 }}
+      // -------------------------------
     >
       <Image
         src={heroImage}
         alt={hero.name}
         fill
-        // Remova o tamanho fixo do sizes quando estiver no carrossel
         sizes={isCarousel ? "100vw" : `${Math.round((heroImage.width * heroHeight) / heroImage.height)}px`}
         style={{ 
           objectFit: "contain", 
