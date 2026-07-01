@@ -7,20 +7,26 @@ interface IProps {
 }
 
 async function getHeroesData(): Promise<{ data: IHeroData[] }> {
-  const res = await fetch("https://6a35c45a766b831960f8c26b.mockapi.io/api/heroes");
+  const res = await fetch(
+    "https://6a35c45a766b831960f8c26b.mockapi.io/api/heroes",
+  );
 
-  if(!res.ok){
-    throw new Error("Failed to request heroes list")
+  if (!res.ok) {
+    throw new Error("Failed to request heroes list");
   }
 
-  return res.json()
+  return res.json();
 }
 
 export default async function Hero({ params }: IProps) {
   // Você DEVE usar o await aqui para extrair o id
   const { id } = await params;
 
-  const heroes = await getHeroesData();
+  const heroesResponse = await getHeroesData();
+  // API may return { data: IHeroData[] } or an array directly depending on environment.
+  const heroesArray: IHeroData[] = Array.isArray(heroesResponse)
+    ? (heroesResponse as unknown as IHeroData[])
+    : (heroesResponse as any).data || (heroesResponse as any).items || [];
 
-  return <Carousel heroes={heroes as any} activeId={id}/>;
+  return <Carousel heroes={heroesArray} activeId={id} />;
 }

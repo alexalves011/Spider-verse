@@ -14,14 +14,10 @@
   align-items: flex-end;
   justify-content: space-between;
   width: 100%;
-  
+
   max-width: calc($max-width - 700px);
-  //gap: clamp(0.25rem, 1vw, 1.5rem);
   position: absolute;
-  //left: 0;
-  //right: 0;
   top: 40%;
-  //padding-inline: clamp(0.5rem, 2vw, 2rem);
 
   @media screen and (min-width: $max-width) {
     max-width: calc($max-width - 180px);
@@ -32,4 +28,190 @@
 .imageContainer {
   position: relative;
   min-width: 0;
+}
+
+.mobileSlider {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: clamp(4.5rem, 10.5vw, 5.8rem);
+    margin: 1rem auto 1.4rem;
+    padding-inline: clamp(1rem, 8vw, 1.5rem);
+    text-align: center;
+    line-height: 0.98;
+    max-width: min(100%, 92vw);
+    word-break: break-word;
+  }
+
+  .heroes {
+    display: none;
+  }
+
+  .mobileSlider {
+    display: block;
+    width: 100%;
+    padding: 0 1rem 1rem;
+    position: relative;
+    z-index: 3;
+  }
+
+  .mobileSliderWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    position: relative;
+    margin-top: 1rem;
+  }
+
+  .mobileHeroCard {
+    flex: 1 1 auto;
+    width: min(88vw, 100%);
+    height: clamp(58vh, 70vh, 75vh);
+    max-height: 78vh;
+    margin: 0 auto;
+    border-radius: 2rem;
+    overflow: visible;
+    position: relative;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:
+      transform 0.35s ease,
+      opacity 0.35s ease;
+  }
+
+  .mobileHeroCard > div {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobileHeroInner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobileNavButton {
+    width: clamp(48px, 10vw, 64px);
+    height: clamp(48px, 10vw, 64px);
+    min-width: clamp(48px, 10vw, 48px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(0, 0, 0, 0.36);
+    color: #ffffff;
+    font-size: clamp(18px, 4.2vw, 28px);
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      transform 0.22s ease,
+      background 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease;
+    z-index: 5;
+    padding: 0.25rem;
+  }
+
+  .mobileNavButton:hover,
+  .mobileNavButton:focus-visible {
+    transform: scale(1.06);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    outline: none;
+  }
+
+  .mobileNavButtonPrevious {
+    margin-left: clamp(6px, 4vw, 12px);
+  }
+  .mobileNavButtonNext {
+    margin-right: clamp(6px, 4vw, 12px);
+  }
+
+  .mobileSecondary {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    margin-top: 0.9rem;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    z-index: 1;
+  }
+
+  .secondaryHero {
+    flex: 1 1 0;
+    min-width: 3.8rem;
+    max-width: 5.25rem;
+    height: 4.8rem;
+    opacity: 0.24;
+    filter: blur(1.3px);
+    transform: scale(0.66);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .secondaryHero:nth-child(odd) {
+    transform: translateY(0.45rem) scale(0.72);
+  }
+
+  .secondaryHero:nth-child(even) {
+    transform: translateY(0.15rem) scale(0.72);
+  }
+
+  .secondaryHero > div {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.9rem;
+  }
+
+  .indicatorButton {
+    width: clamp(6px, 1.1vw, 12px);
+    height: clamp(6px, 1.1vw, 12px);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    background: transparent;
+    cursor: pointer;
+    transition:
+      width 0.18s ease,
+      height 0.18s ease,
+      background 0.18s ease,
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .indicatorButton.active {
+    width: clamp(10px, 1.8vw, 16px);
+    height: clamp(10px, 1.8vw, 16px);
+    background: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  .indicatorButton:hover,
+  .indicatorButton:focus-visible {
+    transform: scale(1.15);
+    outline: none;
+  }
 }

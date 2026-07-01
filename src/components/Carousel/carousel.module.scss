@@ -26,7 +26,7 @@
 }
 
 .hero {
-position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%; // Ocupa o espaço do wrapper
@@ -34,7 +34,7 @@ position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   // Isso garante que a imagem do HeroPicture ocupe o espaço
   > div {
     width: 100% !important;
@@ -46,5 +46,96 @@ position: absolute;
     object-fit: contain;
     object-position: center right;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .carousel {
+    left: 0; /* remove desktop offset on mobile to avoid horizontal overflow */
+  }
+  .wrapper {
+    position: relative;
+    touch-action: pan-y;
+  }
+
+  .mobileSlides {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    will-change: transform;
+    transition: transform 500ms cubic-bezier(0.22, 0.8, 0.3, 1);
+  }
+
+  .mobileSlide {
+    width: 100vw;
+    min-height: 100vh;
+    will-change: transform;
+    transition: transform 500ms cubic-bezier(0.22, 0.8, 0.3, 1);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .mobileSlideInner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    padding: clamp(4.5rem, 8vh, 6rem) 0 4vh 0; /* top padding to avoid header overlap; bottom padding for small screens */
+  }
+
+  .mobileHeroVisual {
+    /* Make hero image the largest element on mobile */
+    flex: 0 0 clamp(48vh, 55vh, 60vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    will-change: transform, opacity;
+    transition:
+      transform 520ms cubic-bezier(0.22, 0.8, 0.3, 1),
+      opacity 420ms linear;
+  }
+
+  .mobileSlideDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0.75rem 1rem 2rem 1rem;
+    background: transparent;
+    will-change: transform, opacity;
+    transition:
+      transform 520ms cubic-bezier(0.22, 0.8, 0.3, 1),
+      opacity 420ms linear;
+  }
+
+  /* Active / inactive transitions adapted to horizontal */
+  .mobileSlide {
+    .mobileHeroVisual {
+      transform: translateX(0) scale(0.92);
+      opacity: 0.9;
+    }
+
+    .mobileSlideDetails {
+      transform: translateX(8px);
+      opacity: 0.92;
+    }
+  }
+
+  .mobileSlide[data-active="true"] {
+    .mobileHeroVisual {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+
+    .mobileSlideDetails {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 }
